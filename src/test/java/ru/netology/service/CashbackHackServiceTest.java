@@ -1,7 +1,7 @@
 package ru.netology.service;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class CashbackHackServiceTest {
 
@@ -11,16 +11,7 @@ public class CashbackHackServiceTest {
         int amount = 500;
         int expected = 1000 - (amount % 1000); // 1000 - 500 = 500
         int actual = service.remain(amount);
-        Assert.assertEquals(actual, expected, "Остаток не совпадает");
-    }
-
-    @Test
-    public void testRemainWhenAmountEqualsBoundary() {
-        CashbackHackService service = new CashbackHackService();
-        int amount = 1000;
-        int expected = 1000 - (amount % 1000); // 1000 - 0 = 1000
-        int actual = service.remain(amount);
-        Assert.assertEquals(actual, expected, "Остаток не совпадает");
+        assertEquals("Остаток не совпадает", expected, actual);
     }
 
     @Test
@@ -29,6 +20,15 @@ public class CashbackHackServiceTest {
         int amount = 1500;
         int expected = 1000 - (amount % 1000); // 1000 - 500 = 500
         int actual = service.remain(amount);
-        Assert.assertEquals(actual, expected, "Остаток не совпадает");
+        assertEquals("Остаток не совпадает", expected, actual);
+    }
+
+    @Test
+    public void testRemainWhenAmountEqualsBoundary() {
+        CashbackHackService service = new CashbackHackService();
+        int amount = 1000;
+        int expected = 0; // Ожидаем, что остаток будет 0
+        int actual = service.remain(amount);
+        assertEquals("Остаток не совпадает", expected, actual);
     }
 }
